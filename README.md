@@ -82,8 +82,7 @@ Screenshots of all key screens:
    Face Not Detected:
      ![WhatsApp Image 2025-05-06 at 19 14 49_068ad201](https://github.com/user-attachments/assets/426371f1-60d1-4bd1-9656-b5b4e125df59)
 
-> 📹 A video demo showcasing the app's core features is available in the repository.
->  Demo video /app/demo/demo-video.mp4
+
 
 
 ## 🚀 Getting Started
@@ -95,7 +94,10 @@ Screenshots of all key screens:
 4. Build and run the app.
 
 
-## 📦 APK & Submission
+📦 APK & Submission
+✅ Download APK from: /app/release/app-release.apk
 
-* ✅ Download from /app/release/app-release.apk
-* ✅ Demo video and screenshots attached.
+✅ Demo video and screenshots attached.
+
+📹 A video demo showcasing the app's core features is available in the repository.
+Demo video: /app/demo/demo-video.mp4
