@@ -4,6 +4,8 @@ plugins {
     id("com.google.devtools.ksp")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.google.firebase.crashlytics)
 }
 
 android {
@@ -44,6 +46,7 @@ dependencies {
 
     implementation(project(":features"))
     implementation(project(":core"))
+    implementation(libs.firebase.crashlytics)
 
     coreLibraryDesugaring(libs.desugar.jdk.libs)
 

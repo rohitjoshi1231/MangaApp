@@ -32,7 +32,15 @@ ui = "1.5.0"                                      # Core Compose UI library
 uiTestJunit4 = "1.5.0"                            # Compose UI testing with JUnit4
 volley = "1.2.1"
 adsMobileSdk = "0.15.1-alpha01"
-junitJupiter = "5.8.1"                                  # Google Volley for networking
+junitJupiter = "5.8.1"
+firebaseCrashlytics = "19.4.3"
+googleGmsGoogleServices = "4.4.2"
+googleFirebaseCrashlytics = "3.0.3"
+firebaseDatabase = "21.0.0"
+firebaseAuth = "23.2.0"
+credentials = "1.5.0"
+credentialsPlayServicesAuth = "1.5.0"
+googleid = "1.1.1"                                  # Google Volley for networking
 
 [libraries]
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
@@ -74,6 +82,12 @@ tasks-vision = { module = "com.google.mediapipe:tasks-vision", version.ref = "ta
 ui = { module = "androidx.compose.ui:ui", version.ref = "ui" }
 volley = { module = "com.android.volley:volley", version.ref = "volley" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics", version.ref = "firebaseCrashlytics" }
+firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
+androidx-credentials = { group = "androidx.credentials", name = "credentials", version.ref = "credentials" }
+androidx-credentials-play-services-auth = { group = "androidx.credentials", name = "credentials-play-services-auth", version.ref = "credentialsPlayServicesAuth" }
+googleid = { group = "com.google.android.libraries.identity.googleid", name = "googleid", version.ref = "googleid" }
 #ads-mobile-sdk = { group = "com.google.android.libraries.ads.mobile.sdk", name = "ads-mobile-sdk", version.ref = "adsMobileSdk" }
 
 [plugins]
@@ -81,4 +95,6 @@ android-application = { id = "com.android.application", version.ref = "agp" }   
 android-library = { id = "com.android.library", version.ref = "agp" }               # Library module
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }    # Kotlin support
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }                        # Kotlin Symbol Processing
-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }              # Hilt plugin
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
+google-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "googleFirebaseCrashlytics" }              # Hilt plugin

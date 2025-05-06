@@ -12,11 +12,13 @@ pluginManagement {
     }
 
 
-
+    val ver = "3.0.3"
     plugins {
         id("com.android.application") version "8.5.0"
         id("com.android.library") version "8.5.0"
         id("org.jetbrains.kotlin.android") version "1.9.23"
+        id("com.google.firebase.crashlytics") version ver
+        id("com.google.gms.google-services") version "4.4.2"
     }
 }
 dependencyResolutionManagement {

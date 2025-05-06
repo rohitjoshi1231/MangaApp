@@ -8,10 +8,16 @@ import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
+import com.google.firebase.database.FirebaseDatabase
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 enum class FetchType {
     ALL, ID
 }
+
+private const val MAX_REQUESTS = 99
 
 fun fetchMangaData(
     context: Context,
@@ -19,6 +25,12 @@ fun fetchMangaData(
     mangaId: String? = null,
     onDataFetched: (List<Manga>) -> Unit
 ) {
+    if (!canMakeApiRequest(context, MAX_REQUESTS)) {
+        Log.e("MangaData", "Daily API request limit reached ($MAX_REQUESTS)")
+        return
+    }
+
+
     val url = when (fetchType) {
         FetchType.ALL -> "https://mangaverse-api.p.rapidapi.com/manga/fetch?type=all"
         FetchType.ID -> {
@@ -33,7 +45,7 @@ fun fetchMangaData(
 
     val headers = mapOf(
         "X-RapidAPI-Host" to "mangaverse-api.p.rapidapi.com",
-        "X-RapidAPI-Key" to "8aa74045fbmsh26980e26de39671p13b5b5jsn7b4ce572fb4e" // Replace with your actual API key
+        "X-RapidAPI-Key" to "43aab1fdffmsh0b0acc0b3d4b337p13172ejsn9b0b4a178c66" // Replace with your actual API key
     )
 
     val jsonObjectRequest =
@@ -92,6 +104,42 @@ fun fetchMangaData(
         DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
     )
 
-    // Add the request to the request queue
     VolleySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest)
+}
+
+
+fun canMakeApiRequest(
+    context: Context, maxRequestsPerDay: Int = 20
+): Boolean {
+    // Get the current logged-in user
+    val userId = "default_user"// for simplicity using default user
+
+    val prefs = context.getSharedPreferences("api_prefs", Context.MODE_PRIVATE)
+    val currentDate = SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date())
+
+    val savedDate = prefs.getString("last_request_date", null)
+    val currentCount = prefs.getInt("request_count", 0)
+
+    val newCount: Int
+    if (savedDate == currentDate) {
+        if (currentCount >= maxRequestsPerDay) return false
+        newCount = currentCount + 1
+    } else {
+        newCount = 1
+    }
+
+    // Save locally
+    prefs.edit().putString("last_request_date", currentDate).putInt("request_count", newCount)
+        .apply()
+
+    // Update Firebase
+    updateRequestCountInFirebase(userId, currentDate, newCount)
+
+    return true
+}
+
+private fun updateRequestCountInFirebase(userId: String, date: String, count: Int) {
+    val database = FirebaseDatabase.getInstance()
+    val ref = database.getReference("api_requests/$userId/$date")
+    ref.setValue(count)
 }

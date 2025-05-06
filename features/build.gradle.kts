@@ -4,6 +4,7 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("kotlin-kapt")
     id("com.google.devtools.ksp")
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -58,6 +59,7 @@ dependencies {
 
     // glide
     implementation(libs.glide)
+    implementation(libs.firebase.database)
 
     //noinspection KaptUsageInsteadOfKsp
     kapt(libs.compiler)
